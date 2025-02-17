@@ -6,14 +6,10 @@ def main():
         sys.stdout.write("$ ")
         command = input()
 
-        match command.split()[0]:
-            case "exit": sys.exit(int(command.split()[1]))
-            case "echo": sys.stdout.write(f"{' '.join(command.split()[1:])}\n")
-            case "type": sys.stdout.write(
-                f"{command.split()[1]} is a shell builtin\n"
-                if command.split()[1] in {"exit", "echo", "type"}
-                else f"{command.split()[1]}: not found\n"
-            )
+        match command.split():
+            case ["exit", arg]: sys.exit(int(arg))
+            case ["echo", *args]: sys.stdout.write(f"{' '.join(args)}\n")
+            case ["type", arg] if arg in {"type", "exit", "echo"}: sys.stdout.write(f"{arg} is a shell builtin\n")
             case _: sys.stdout.write(f"{command.split()[0]}: command not found\n")
 
 
