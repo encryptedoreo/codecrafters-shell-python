@@ -2,9 +2,8 @@ import sys
 
 
 def main():
-    sys.stdout.write("$ ")
-
     while True:
+        sys.stdout.write("$ ")
         command = input()
         sys.stdout.write(f"{command}: command not found")
 
