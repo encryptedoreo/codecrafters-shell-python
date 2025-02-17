@@ -11,6 +11,7 @@ def main():
             case ["echo", *args]: sys.stdout.write(f"{' '.join(args)}\n")
             case ["type", arg] if arg in {"type", "exit", "echo"}: sys.stdout.write(f"{arg} is a shell builtin\n")
             case ["type", arg] if arg not in {"type", "exit", "echo"}: sys.stdout.write(f"{arg}: not found\n")
+            
             case _: sys.stdout.write(f"{command.split()[0]}: command not found\n")
 
 
