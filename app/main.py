@@ -7,7 +7,8 @@ def main():
         command = input()
 
         match command.split()[0]:
-            case "exit": exit(int(command.split()[1]))
+            case "exit": sys.exit(int(command.split()[1]))
+            case "echo": sys.stdout.write(f"{' '.join(command.split()[1:])}\n")
             case _: sys.stdout.write(f"{command}: command not found\n")
 
 
