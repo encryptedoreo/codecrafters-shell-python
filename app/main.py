@@ -12,7 +12,7 @@ def main():
             case "type": sys.stdout.write(
                 f"{command.split()[1]} is a shell builtin\n"
                 if command.split()[1] in {"exit", "echo", "type"}
-                else f"{command.split()[1]}: command not found\n"
+                else f"{command.split()[1]}: not found\n"
             )
             case _: sys.stdout.write(f"{command.split()[0]}: command not found\n")
 
