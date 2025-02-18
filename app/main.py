@@ -17,7 +17,7 @@ def main():
         match cmd:
             case ["exit", arg]: sys.exit(int(arg))
             case ["exit"]: sys.exit(0)
-            case ["echo", *args]: (stdout if '2>' not in args else sys.stdout).write(f"{' '.join(args if stdout == sys.stdout else args[:-2])}\n")
+            case ["echo", *args]: (stdout if '2>' not in args or '2>>' in args else sys.stdout).write(f"{' '.join(args if stdout == sys.stdout else args[:-2])}\n")
             case ["type", arg] if arg in builtins: stdout.write(f"{arg} is a shell builtin\n")
             case ["type", arg] if path := shutil.which(arg): stdout.write(f"{arg} is {path}\n")
             case ["type", arg] if arg not in builtins: stdout.write(f"{arg}: not found\n")
