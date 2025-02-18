@@ -11,7 +11,7 @@ def main():
         command = sys.stdin.readline().strip()
 
         cmd = shlex.split(command, posix=True)
-        stdout = sys.stdout if ">" not in command else cmd[-1]
+        stdout = sys.stdout if ">" not in command else open(cmd[-1])
 
         match cmd:
             case ["exit", arg]: sys.exit(int(arg))
@@ -27,6 +27,9 @@ def main():
 
             case [fn, *args] if shutil.which(fn): subprocess.run(cmd, stdout=stdout)
             case [fn, *args] if not shutil.which(fn): stdout.write(f"{fn}: command not found\n")
+        
+        if ">" in command:
+            stdout.close()
 
 
 if __name__ == "__main__":
