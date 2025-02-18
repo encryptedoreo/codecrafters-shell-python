@@ -6,6 +6,8 @@ import shlex
 
 
 def main():
+    builtins = {"type", "exit", "echo", "pwd", "cd"}
+
     while True:
         sys.stdout.write("$ ")
         command = sys.stdin.readline().strip()
@@ -17,9 +19,9 @@ def main():
             case ["exit", arg]: sys.exit(int(arg))
             case ["exit"]: sys.exit(0)
             case ["echo", *args]: stdout.write(f"{' '.join(args)}\n")
-            case ["type", arg] if arg in {"type", "exit", "echo", "pwd", "cd"}: stdout.write(f"{arg} is a shell builtin\n")
+            case ["type", arg] if arg in builtins: stdout.write(f"{arg} is a shell builtin\n")
             case ["type", arg] if path := shutil.which(arg): stdout.write(f"{arg} is {path}\n")
-            case ["type", arg] if arg not in {"type", "exit", "echo"}: stdout.write(f"{arg}: not found\n")
+            case ["type", arg] if arg not in builtins: stdout.write(f"{arg}: not found\n")
 
             case ["pwd"]: sys.stdout.write(f"{os.getcwd()}\n")
             case ["cd", dir_path] if (path_exists := os.path.exists(expanded := os.path.expanduser(dir_path))): os.chdir(expanded)
