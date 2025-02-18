@@ -16,8 +16,8 @@ def main():
             case ["type", arg] if path := shutil.which(arg): sys.stdout.write(f"{arg} is {path}\n")
             case ["type", arg] if arg not in {"type", "exit", "echo"}: sys.stdout.write(f"{arg}: not found\n")
 
-            case [fn, *args] if os.path.exists(fn): os.system(command)
-            case [fn, *args] if not os.path.exists(fn): sys.stdout.write(f"{fn}: command not found\n{os.path.exists(fn)}")
+            case [fn, *args] if shutil.which(fn): os.system(command)
+            case [fn, *args] if not shutil.which(fn): sys.stdout.write(f"{fn}: command not found\n")
 
 
 if __name__ == "__main__":
