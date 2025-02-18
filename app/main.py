@@ -16,8 +16,7 @@ def main():
             case ["type", arg] if arg not in {"type", "exit", "echo"}: sys.stdout.write(f"{arg}: not found\n")
 
             case ["pwd"]: sys.stdout.write(f"{os.getcwd()}\n")
-            case ["cd", dir_path] if expanded := shutil.which(dir_path): os.chdir(expanded)
-            case ["cd", dir_path] if not shutil.which(dir_path): sys.stdout.write(f"cd: {dir_path}: No such file or directory")
+            case ["cd", dir_path] if os.path.exists(expanded := os.path.expanduser(dir_path)): os.chdir(expanded)
 
             case [fn, *args] if shutil.which(fn): os.system(command)
             case [fn, *args] if not shutil.which(fn): sys.stdout.write(f"{fn}: command not found\n")
