@@ -12,8 +12,8 @@ def main():
         sys.stdout.write("$ ")
         command = sys.stdin.readline().strip()
 
-        cmd = shlex.split(command, posix=True)
-        stdout = sys.stdout if ">" not in command else open(cmd[-1])
+        cmd = shlex.split(command.replace('1>', '>'), posix=True)
+        stdout = sys.stdout if ">" not in command else open(cmd[-1], 'w')
 
         match cmd:
             case ["exit", arg]: sys.exit(int(arg))
