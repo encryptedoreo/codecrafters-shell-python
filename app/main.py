@@ -16,7 +16,7 @@ def main():
         stdout = sys.stdout if ">" not in command else open(cmd[-1], 'a')
         output = ''
 
-        match cmd:
+        match cmd[:-2]:
             case ["exit", arg]: sys.exit(int(arg))
             case ["exit"]: sys.exit(0)
             case ["echo", *args]: output += f"{' '.join(args)}\n"
