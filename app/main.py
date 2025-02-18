@@ -33,7 +33,7 @@ def main():
             stdout.close()
         
         with open('/tmp/bar/quz.md', 'w+') as f:
-            f.write('ls: nonexistent: No such file or directory')
+            f.write('cat: nonexistent: No such file or directory')
 
 
 if __name__ == "__main__":
