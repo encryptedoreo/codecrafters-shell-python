@@ -17,7 +17,7 @@ def main():
             case ["type", arg] if arg not in {"type", "exit", "echo"}: sys.stdout.write(f"{arg}: not found\n")
 
             case [fn, *args] if os.path.exists(fn): os.system(command)
-            case [fn, *args] if not os.path.exists(fn): sys.stdout.write(f"{fn}: command not found\n")
+            case [fn, *args] if not os.path.exists(fn): sys.stdout.write(f"{fn}: command not found\n{os.path.exists(fn)}")
 
 
 if __name__ == "__main__":
