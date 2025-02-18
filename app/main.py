@@ -2,6 +2,7 @@ import sys
 import shutil
 import os
 import shlex
+import contextlib
 
 
 def main():
@@ -31,9 +32,6 @@ def main():
         
         if ">" in command:
             stdout.close()
-        
-        with open('/tmp/bar/quz.md', 'w+') as f:
-            f.write('cat: nonexistent: No such file or directory')
 
 
 if __name__ == "__main__":
