@@ -28,7 +28,7 @@ def main():
             case ["cd", dir_path] if (path_exists := os.path.exists(expanded := os.path.expanduser(dir_path))): os.chdir(expanded)
             case ["cd", dir_path] if not path_exists: output += f"cd: {os.path.expanduser(dir_path)}: No such file or directory\n"
 
-            case [fn, *args] if shutil.which(fn): output += subprocess.run(cmd, stdout=stdout, text=True).stdout.rstrip()
+            case [fn, *args] if shutil.which(fn): output += subprocess.check_output(cmd).rstrip()
             case [fn, *args] if not shutil.which(fn): output += f"{fn}: command not found\n"
         
         stdout.write(output)
