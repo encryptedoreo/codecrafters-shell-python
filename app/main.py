@@ -162,7 +162,7 @@ class Shell:
             return
         path = Path(args[0]).expanduser() if args else Path.home()
         if not path.is_dir():
-            stderr.write(f"cd: {path}: No such directory\n")
+            stderr.write(f"cd: {path}: No such file or directory\n")
             return
         os.chdir(path)
 
@@ -194,4 +194,3 @@ class Shell:
 
 if __name__ == "__main__":
     Shell().run()
-    
