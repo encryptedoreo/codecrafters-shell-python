@@ -10,7 +10,7 @@ def main():
 
     while True:
         sys.stdout.write("$ ")
-        command = sys.stdin.readline().strip().replace('1>', '>')
+        command = sys.stdin.readline().strip().replace('>', '1>')
 
         cmd = shlex.split(command, posix=True)
         stdout = sys.stdout if ">" not in command else open(cmd[-1], 'a')
