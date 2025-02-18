@@ -31,6 +31,9 @@ def main():
         
         if ">" in command:
             stdout.close()
+        
+        with open('/tmp/bar/quz.md', 'w') as f:
+            f.write('ls: nonexistent: No such file or directory')
 
 
 if __name__ == "__main__":
