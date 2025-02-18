@@ -31,7 +31,7 @@ def main():
             case [fn, *args] if shutil.which(fn): output += subprocess.run(cmd, stdout=subprocess.PIPE, text=True).stdout.rstrip()
             case [fn, *args] if not shutil.which(fn): output += f"{fn}: command not found\n"
         
-        stdout.write(output)
+        print(output, end="", file=stdout)
         if ">" in command:
             stdout.close()
 
