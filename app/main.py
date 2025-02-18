@@ -11,12 +11,13 @@ def main():
         match command.split():
             case ["exit", arg]: sys.exit(int(arg))
             case ["echo", *args]: sys.stdout.write(f"{' '.join(args)}\n")
-            case ["type", arg] if arg in {"type", "exit", "echo", "pwd"}: sys.stdout.write(f"{arg} is a shell builtin\n")
+            case ["type", arg] if arg in {"type", "exit", "echo", "pwd", "cd"}: sys.stdout.write(f"{arg} is a shell builtin\n")
             case ["type", arg] if path := shutil.which(arg): sys.stdout.write(f"{arg} is {path}\n")
             case ["type", arg] if arg not in {"type", "exit", "echo"}: sys.stdout.write(f"{arg}: not found\n")
 
             case ["pwd"]: sys.stdout.write(f"{os.getcwd()}\n")
             case ["cd", dir_path] if os.path.exists(expanded := os.path.expanduser(dir_path)): os.chdir(expanded)
+            case ["cd", dir_path] if not os.path.exists(expanded := os.path.expanduser(dir_path)): sys.stdout.write(f"cd: {expanded}: No such file or directory")
 
             case [fn, *args] if shutil.which(fn): os.system(command)
             case [fn, *args] if not shutil.which(fn): sys.stdout.write(f"{fn}: command not found\n")
