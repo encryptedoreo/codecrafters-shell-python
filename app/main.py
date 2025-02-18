@@ -6,7 +6,7 @@ import os
 def main():
     while True:
         sys.stdout.write("$ ")
-        command = input()
+        command = sys.stdin.readline().strip()
 
         match command.split():
             case ["exit", arg]: sys.exit(int(arg))
@@ -16,7 +16,7 @@ def main():
             case ["type", arg] if path := shutil.which(arg): sys.stdout.write(f"{arg} is {path}\n")
             case ["type", arg] if arg not in {"type", "exit", "echo"}: sys.stdout.write(f"{arg}: not found\n")
 
-            case ["pwd"]: sys.stdout.write(os.getcwd())
+            case ["pwd"]: sys.stdout.write(f"{os.getcwd()}\n")
 
             case [fn, *args] if shutil.which(fn): os.system(command)
             case [fn, *args] if not shutil.which(fn): sys.stdout.write(f"{fn}: command not found\n")
