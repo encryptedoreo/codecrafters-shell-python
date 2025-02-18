@@ -12,7 +12,7 @@ def main():
         command = sys.stdin.readline().strip().replace('1>', '>')
 
         cmd = shlex.split(command, posix=True)
-        stdout = sys.stdout if ">" not in command else open(cmd[-1], 'w+')
+        stdout = sys.stdout if ">" not in command else open(cmd[-1], f'{"a" if ">>" in cmd else "w"}+')
 
         match cmd:
             case ["exit", arg]: sys.exit(int(arg))
